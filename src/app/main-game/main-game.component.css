@@ -1,0 +1,33 @@
+.gameSpace{
+    width: 175px;
+    height: 175px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.row1{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.col1{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.gameRow {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    margin: 0px auto;
+    width: 600px;
+}
+
+.blankSpace {
+    margin: auto;
+    height: 150px;
+    width: 150px;
+}

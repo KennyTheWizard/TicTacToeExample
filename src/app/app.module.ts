@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
+import { MainGameComponent } from './main-game/main-game.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainGameComponent
   ],
   imports: [
     BrowserModule

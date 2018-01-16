@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="scoreboard">
+    <h1>Player wins: {{ playerWins }}</h1>
+    <h1>Computer wins: {{ computerWins }}</h1>
+    <h1>Draws: {{ drawGames }}</h1>
+    <div>
+      <button *ngIf="!gameStarted" (click)="startGameAsX()">Start Game as X</button>
+      <button *ngIf="!gameStarted" (click)="startGameAsO()">Start Game as O</button>
+  </div>
+  <div class="gameboard">
+    <div *ngFor="let row of gameBoard.board; index as i" class="gameRow">
+      <div *ngFor="let column of row; index as j" class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
+        <h1 *ngIf="gameBoard.board[i][j] == 1">X</h1>
+        <h1 *ngIf="gameBoard.board[i][j] == -1">O</h1>
+        <div *ngIf="gameBoard.board[i][j] == 0 && gameStarted" class="blankSpace" (click)="playerMove([i, j])">
+        
+      </div>
+    </div>
+  </div>
+</div>
