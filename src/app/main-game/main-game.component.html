@@ -6,12 +6,14 @@
     <div>
       <button *ngIf="!gameStarted" (click)="startGameAsX()">Start Game as X</button>
       <button *ngIf="!gameStarted" (click)="startGameAsO()">Start Game as O</button>
-  </div>
+      <button *ngIf="gameStarted && !gameOver" (click)="resetGame()">Reset Game</button>
+      <button *ngIf="gameStarted && gameOver" (click)="resetGame()">Play Again?</button>
+    </div>
   <div class="gameboard">
     <div *ngFor="let row of gameBoard.board; index as i" class="gameRow">
-      <div *ngFor="let column of row; index as j" class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
-        <h1 *ngIf="gameBoard.board[i][j] == 1" class="filledSpace">X</h1>
-        <h1 *ngIf="gameBoard.board[i][j] == -1" class="filledSpace">O</h1>
+      <div *ngFor="let column of row; index as j"  class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
+        <h1 *ngIf="gameBoard.board[i][j] == 1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">X</h1>
+        <h1 *ngIf="gameBoard.board[i][j] == -1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">O</h1>
         <div *ngIf="gameBoard.board[i][j] == 0 && gameStarted" class="blankSpace" (click)="playerMove([i, j])">
         
       </div>

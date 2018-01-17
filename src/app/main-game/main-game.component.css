@@ -35,3 +35,7 @@
 .filledSpace {
     font-size: 75px;
 }
+
+.highlightSpace {
+    background-color: lightblue;
+}

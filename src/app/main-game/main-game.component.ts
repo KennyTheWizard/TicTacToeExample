@@ -11,6 +11,7 @@ import { GameResult } from '../game-result';
 })
 export class MainGameComponent implements OnInit {
 
+  highlightSpaces:boolean[][];
   gameBoard:GameBoard = new GameBoard();
   playerWins:number;
   computerWins:number;
@@ -20,6 +21,8 @@ export class MainGameComponent implements OnInit {
   playerSide:number;
   computerSide:number;
   gameStarted:boolean;
+  gameOver:boolean;
+
   constructor() { }
 
   ngOnInit() {
@@ -28,12 +31,18 @@ export class MainGameComponent implements OnInit {
       [0, 0, 0],
       [0, 0, 0],
     ]
+    this.highlightSpaces = [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]
     this.dataBaseList = [];
     this.currGame = [];
     this.playerWins = 0;
     this.computerWins = 0;
     this.drawGames = 0;
     this.gameStarted = false;
+    this.gameOver = false;
     // let count = 0;
     // while(count < 10) {
 
@@ -72,8 +81,11 @@ export class MainGameComponent implements OnInit {
   }
 
   playerMove(move:number[]) {
+    if(this.gameOver) {
+      return;
+    }
     this.makeMove(move, this.playerSide);
-    if (this.gameStarted) {
+    if (this.gameStarted && !this.gameOver) {
       this.makeMove(this.getNextMove(), this.computerSide);
     }
   }
@@ -105,6 +117,17 @@ export class MainGameComponent implements OnInit {
 
   }
 
+  resetGame() {
+    this.currGame = [];
+    this.gameBoard.resetBoard();
+    this.gameStarted = false;
+    this.gameOver = false;
+    this.highlightSpaces = [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]
+  }
   processEndGame(result:GameResult) {
     // console.log(result);
     if(result.winner == 0) {
@@ -114,12 +137,11 @@ export class MainGameComponent implements OnInit {
     } else {
       this.computerWins++;
     }
+    for(let i = 0; i < result.winningSpaces.length; i++) {
+      this.highlightSpaces[result.winningSpaces[i][0]][result.winningSpaces[i][1]] = true;
+    }
     this.saveGameResults(result);
-    this.currGame = [];
-    this.gameBoard.resetBoard();
-    this.gameStarted = false;
-    
-
+    this.gameOver=true;
   }
   makeMove(theMove:number[], player:number){
     let currState:GameState = new GameState();
