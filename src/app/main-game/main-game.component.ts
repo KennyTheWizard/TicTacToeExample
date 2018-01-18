@@ -22,6 +22,7 @@ export class MainGameComponent implements OnInit {
   computerSide:number;
   gameStarted:boolean;
   gameOver:boolean;
+  processingMove:boolean;
 
   constructor() { }
 
@@ -43,6 +44,7 @@ export class MainGameComponent implements OnInit {
     this.drawGames = 0;
     this.gameStarted = false;
     this.gameOver = false;
+    this.processingMove = false;
     // let count = 0;
     // while(count < 10) {
 
@@ -84,9 +86,13 @@ export class MainGameComponent implements OnInit {
     if(this.gameOver) {
       return;
     }
+    if(this.processingMove) {
+      return;
+    }
     this.makeMove(move, this.playerSide);
     if (this.gameStarted && !this.gameOver) {
-      this.makeMove(this.getNextMove(), this.computerSide);
+      this.processingMove = true;
+      setTimeout(() => {this.makeMove(this.getNextMove(), this.computerSide)}, 1000);
     }
   }
   saveGameResults(result:GameResult) {
@@ -150,6 +156,7 @@ export class MainGameComponent implements OnInit {
     this.currGame.push(currState);
     this.gameBoard.board[theMove[0]][theMove[1]] = player;
     let result = this.gameBoard.getResult();
+    this.processingMove = false;
     console.log(result);
     if (result.gameOver) {
       this.processEndGame(result);
