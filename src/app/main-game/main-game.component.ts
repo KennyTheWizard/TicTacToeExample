@@ -187,6 +187,7 @@ export class MainGameComponent implements OnInit {
       // // console.log(JSON.stringify(this.dataBaseList));
     }
     let winMove = this.gameBoard.getWinMove();
+    console.log(winMove);
     if(winMove) {
       return winMove;
     }

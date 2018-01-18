@@ -47,7 +47,7 @@ export class GameBoard {
         return moves;
     }
 
-    getWinMove():number[] {
+    getWinMove(currentSide:number):number[] {
 
         let rowSums:number[] = [0, 0, 0];
         let colSums:number[] = [0, 0, 0];
@@ -68,6 +68,41 @@ export class GameBoard {
         }
 
         for(let i = 0; i < rowSums.length; i++) {
+            if(rowSums[i] == 2 * currentSide) {
+                for(let j = 0; j < this.board.length; j++ ) {
+                    if(this.board[i][j] == 0) {
+                        return [i, j];
+                    }
+                }
+            }
+        }
+
+        for(let i = 0; i < colSums.length; i++) {
+            if(colSums[i] == 2 * currentSide) {
+                for(let j = 0; j < this.board.length; j++) {
+                    if(this.board[j][i] == 0 ) {
+                        return [j, i];
+                    }
+                }
+            }
+        }
+        
+        if(diagSums[0] * currentSide == 2) {
+            for(let i = 0; i < this.board.length; i++) {
+                if(this.board[i][i] == 0) {
+                    return [i, i];
+                }
+            }
+        }
+        if(diagSums[1] * currentSide == 2) {
+            for(let i = 0; i < this.board.length; i++) {
+                if(this.board[i][2 - i] == 0) {
+                    return [i, 2 - i];
+                }
+            }
+        }
+
+        for(let i = 0; i < rowSums.length; i++) {
             if(Math.abs(rowSums[i]) == 2) {
                 for(let j = 0; j < this.board.length; j++ ) {
                     if(this.board[i][j] == 0) {
@@ -78,7 +113,7 @@ export class GameBoard {
         }
 
         for(let i = 0; i < colSums.length; i++) {
-            if(Math.abs(colSums[i]) == 2) {
+            if(Math.abs(colSums[i]) == 2 * currentSide) {
                 for(let j = 0; j < this.board.length; j++) {
                     if(this.board[j][i] == 0 ) {
                         return [j, i];
@@ -86,7 +121,6 @@ export class GameBoard {
                 }
             }
         }
-
         if(Math.abs(diagSums[0]) == 2) {
             for(let i = 0; i < this.board.length; i++) {
                 if(this.board[i][i] == 0) {

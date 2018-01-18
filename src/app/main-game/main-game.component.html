@@ -10,14 +10,14 @@
       <h3>Player wins:<span class="score">{{ playerWins }}</span> </h3>
       <h3>Computer wins: <span class="score">{{ computerWins }}</span></h3>
       <h3>Draws: <span class="score">{{ drawGames }}</span></h3>
+      <button *ngIf="gameStarted && !gameOver" (click)="resetGame()">Reset Game</button>
+      <button *ngIf="gameStarted && gameOver" (click)="resetGame()">Play Again?</button>
     </div><!--closes scoreboard content-->
   </div><!--closes scoreboard-->
   
   <div class="attention" [ngClass]="{'hide': gameStarted} ">
       <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsX()"><span class="playgameas">Play Game as :</span><span class="red"> X</span></button>
       <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsO()"><span class="playgameas">Play Game as :</span><span class="red"> O</span> </button>
-      <button [ngClass]="{'hide': gameStarted && !gameOver }" (click)="resetGame()">Reset Game</button>
-      <button [ngClass]="{'hide': gameStarted && gameOver }" (click)="resetGame()">Play Again?</button>
     </div>
   </div><!-- closes wrapper-->
   <div class="gameBack">
