@@ -143,8 +143,11 @@ export class MainGameComponent implements OnInit {
     } else {
       this.computerWins++;
     }
-    for(let i = 0; i < result.winningSpaces.length; i++) {
-      this.highlightSpaces[result.winningSpaces[i][0]][result.winningSpaces[i][1]] = true;
+    if(result.winningSpaces) {
+
+      for(let i = 0; i < result.winningSpaces.length; i++) {
+        this.highlightSpaces[result.winningSpaces[i][0]][result.winningSpaces[i][1]] = true;
+      }
     }
     this.saveGameResults(result);
     this.gameOver=true;
@@ -186,8 +189,7 @@ export class MainGameComponent implements OnInit {
       this.dataBaseList.push(currState);
       // // console.log(JSON.stringify(this.dataBaseList));
     }
-    let winMove = this.gameBoard.getWinMove();
-    console.log(winMove);
+    let winMove = this.gameBoard.getWinMove(this.computerSide);
     if(winMove) {
       return winMove;
     }
