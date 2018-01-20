@@ -17,9 +17,25 @@ body {
 }
 
 
+/* prevent mobile devices from attempting to highlight text when a user touches elements like buttons  */
+h1, h2, h3, button{
+    user-select: none;
+    -webkit-user-select: none;
+}
 
 
- .playgameas, button:hover .playgameas, .red::after, .red::before, .scoreboard h3, .scoreboard h3:hover, button, button.hide, .attention.hide, .red, button:hover .red, button:hover .red::before, button:hover .red::after, .gameBox:hover #ticTacO .cls-1, .cls-1, #ticTacX {
+/* smooth transitions on hover/touch effects  */
+.scoreboard h3:hover .player, .player,
+.scoreboard  svg, .playgameas, 
+button:hover .playgameas, 
+.red::after, .red::before, 
+.scoreboard h3, .scoreboard h3:hover, 
+button, button.hide, .attention.hide, 
+.red, button:hover .red, 
+button:hover .red::before, 
+button:hover .red::after, 
+.gameBox:hover #ticTacO .cls-1, .cls-1, #ticTacX, 
+.playerChoice {
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -27,32 +43,25 @@ body {
     
 }
 
+
 #resetButton, #resetButton:hover, .resetText{
     transition: all 0.1s ease !important;
 
 }
-.wrapper {
-    display:inline-block;
-    width: 30vh;
-    max-width:250px;
-    vertical-align: top;
+
+
+svg {
+    animation: fadeIn .4s ease 1;
 }
-.hcontain {
-    text-align: left;
-    /* border-left: 1px solid rgba(30,30,30,.1);
-    border-right: 1px solid rgba(30,30,30,.1);
-    border-bottom: 1px solid rgba(30,30,30,.1); */
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    
-    overflow: hidden;
-    
-    
+
+
+
+.headerContain {
+    text-align:left;
 }
 
 
 h1 {
-    
     display:inline-block;
     margin: 0 0 0 0 !important;
     font-size: 4vh !important;
@@ -62,7 +71,7 @@ h1 {
     border-bottom-right-radius:10px;
     padding: 6vh 1vh 1vh 1vh;
     line-height:4.5vh;
-    letter-spacing:0px;
+    letter-spacing:-1px;
     text-transform: lowercase !important;
     text-align:center;
 }
@@ -82,17 +91,7 @@ span.tacSlash {
 }
 
 
-.playerChoice{
-    max-width:1.5vh;
-    font-size:3vh;
-    margin-right: .5vh;
-    font-size: 2vh;
-    color: rgba(0,0,0,.3);
-}
 
-.playerChoice svg {
-    vertical-align: middle;
-}
 .scoreboard {
     text-align: left !important;
     font-size:11px;
@@ -104,20 +103,15 @@ span.tacSlash {
     background: rgba(221,221,221,.7);
     margin-top:2vh;
     white-space: nowrap;
-    
 }
-.margins {
-    margin-left: 4.5vh !important;
-}
+
 .scoreboardContent {
     display: inline-block;
     position: relative;
     width:77%;
 }
 
-svg {
-    animation: fadeIn .4s ease 1;
-}
+
 .scoreboard h2 {
     background-color: #1e1e1e;
     color: #f7f7f7;
@@ -139,7 +133,7 @@ svg {
     line-height: 3.5vh;
     margin: 0 2vh 0 2vh;
     letter-spacing: 0px;
-    border-bottom: 1px solid rgba(30,30,30,.07);
+    border-bottom: 1px dotted rgba(30,30,30,.07);
     font-family: "rift-soft", arial, helvetica, sans-serif;
     
 }
@@ -148,8 +142,51 @@ svg {
     border-bottom: 1px solid rgba(30,30,30,1);
 }
 
-.scoreboard  svg#ticTacX, .scoreboard svg#ticTacO {
+.scoreboard  svg {
     max-width:1.5vh;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.player {
+    padding: 0 0 0 0;
+    
+}
+
+.scoreboard h3:hover .player {
+    padding-left:.5vh;
+    line-height: 3.5vh;
+    color: rgba(0,0,0,1);
+   
+}
+
+.playerChoice{
+    max-width:1.5vh;
+    font-size:3vh;
+    margin-right: .5vh;
+    font-size: 2vh;
+    color: rgba(0,0,0,.3);
+}
+
+.playerChoice svg {
+    vertical-align: middle;
+}
+
+.drawGames .cls-1 {
+    fill: rgb(255, 91, 25);
+}
+
+.drawGames .cls-2 {
+    fill: none;
+}
+
+.drawGames .cls-3 {
+    fill: rgb(30,30,30);
+}
+
+.scoreboard h3:hover svg{
+    padding:2px;
+    box-sizing:border-box;
 }
 .scoreboard h3:last-of-type{
     border-bottom: 0px !important;
@@ -493,6 +530,15 @@ button.hide:first-of-type {
 @-moz-keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
 @-webkit-keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
 @keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
+
+
+
+@-ms-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@-moz-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@-webkit-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+
+
 
 @-ms-keyframes wiggle{0%{-ms-transform:rotate(1deg);}50%{-ms-transform:rotate(-1deg);}100%{-ms-transform:rotate(1deg);}}
 @-moz-keyframes wiggle{0%{-moz-transform:rotate(1deg);}50%{-moz-transform:rotate(-1deg);}100%{-moz-transform:rotate(1deg);}}
