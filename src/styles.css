@@ -166,10 +166,14 @@ h1 {
 }
 .attention {
     animation: blink .5s ease infinite;
+    -webkit-animation: blink .5s ease infinite;
+    -moz-animation: blink .5s ease infinite;
+    -o-animation: blink .5s ease infinite;
     margin-left:-2vh;
     margin-right: -2vh;
     padding: 2vh 2vh 2vh 2vh;
     margin-top: 2vh;
+    border: 2px solid rgba(0,0,0,0);
     border-radius: 14px;
 }
 
@@ -298,7 +302,7 @@ button.hide:first-of-type {
 @keyframes wiggle{0%{transform:rotate(1deg);}50%{transform:rotate(-1deg);}100%{transform:rotate(1deg);}}
 
 
-/* @-ms-keyframes blink{0%{-ms-transform:rotate(1deg);}50%{-ms-transform:rotate(-1deg);}100%{-ms-transform:rotate(1deg);}}
-@-moz-keyframes blink{0%{-moz-transform:rotate(1deg);}50%{-moz-transform:rotate(-1deg);}100%{-moz-transform:rotate(1deg);}}
-@-webkit-keyframes blink{0%{-webkit-transform:rotate(1deg);}50%{-webkit-transform:rotate(-1deg);}100%{-webkit-transform:rotate(1deg);}} */
+@-ms-keyframes blink{0%{border: 2px solid rgba(255, 255, 255, 1);}50%{border: 2px solid rgba(0,0,0,1);}100%{border: 2px solid rgba(255, 91, 25, 1);}}
+@-moz-keyframes blink{0%{border: 2px solid rgba(255, 255, 255, 1);}50%{border: 2px solid rgba(0,0,0,1);}100%{border: 2px solid rgba(255, 91, 25, 1);}}
+@-webkit-keyframes blink{0%{border: 2px solid rgba(255, 255, 255, 1);}50%{border: 2px solid rgba(0,0,0,1);}100%{border: 2px solid rgba(255, 91, 25, 1);}}
 @keyframes blink{0%{border: 2px solid rgba(255, 255, 255, 1);}50%{border: 2px solid rgba(0,0,0,1);}100%{border: 2px solid rgba(255, 91, 25, 1);}}
