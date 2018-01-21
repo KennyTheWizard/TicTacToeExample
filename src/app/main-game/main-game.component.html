@@ -6,54 +6,52 @@
       
     </div> 
   <div class="gameBack">
-  <div class="gameboard">
-    <div class="gameboardContent">
-    <div *ngFor="let row of gameBoard.board; index as i" class="gameRow">
-      <!-- example of highlightSpaces array
-      <div *ngFor="let column of row; index as j"  class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
-        <h1 *ngIf="gameBoard.board[i][j] == 1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">X</h1>
-        <h1 *ngIf="gameBoard.board[i][j] == -1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">O</h1>
-      -->
-      <div *ngFor="let column of row; index as j" class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
-        
-        <!--div containing svg for "x" // replaces h3-->
-        <div class="gameBox" *ngIf="gameBoard.board[i][j] == 1" class="filledSpace gameBox" [class.highlightSpace]="highlightSpaces[i][j]">
-            <svg id="ticTacX" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.6 49.6"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_x</title><path class="cls-1" d="M51.45,7.48,46.3,2.33a.79.79,0,0,0-1.13,0L27.46,20a.81.81,0,0,1-1.14,0L8.61,2.33a.79.79,0,0,0-1.13,0L2.33,7.48a.79.79,0,0,0,0,1.13L20,26.32a.81.81,0,0,1,0,1.14L2.33,45.17a.79.79,0,0,0,0,1.13l5.15,5.15a.79.79,0,0,0,1.13,0L26.32,33.74a.81.81,0,0,1,1.14,0L45.17,51.45a.79.79,0,0,0,1.13,0l5.15-5.15a.79.79,0,0,0,0-1.13L33.74,27.46a.81.81,0,0,1,0-1.14L51.45,8.61A.79.79,0,0,0,51.45,7.48Z" transform="translate(-2.09 -2.09)"/></svg>
-        </div>
-        
-          <!--div containing svg for "o" // replaces h3-->
-        <div class="gameBox" *ngIf="gameBoard.board[i][j] == -1" class="filledSpace gameBox" [class.highlightSpace]="highlightSpaces[i][j]">
-          <svg id="ticTacO" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.78 53.78"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_0</title><path class="cls-1" d="M26.89,0A26.89,26.89,0,1,0,53.78,26.89,26.89,26.89,0,0,0,26.89,0Zm0,45.76A18.87,18.87,0,1,1,45.76,26.89,18.87,18.87,0,0,1,26.89,45.76Z" transform="translate(0 0)"/></svg></div>
-        <div *ngIf="gameBoard.board[i][j] == 0 && gameStarted" class="blankSpace" (click)="playerMove([i, j])">
-        
-      </div><!--closes blankSpace-->
-    </div><!--closes gameSpace-->
-  </div><!--closes gameRow-->
-</div><!--closes gameboardContent-->
-</div><!--closes gameboard-->
+    <div class="gameboard">
+      <div class="gameboardContent">
+        <div *ngFor="let row of gameBoard.board; index as i" class="gameRow">
+          <div *ngFor="let column of row; index as j" class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
+            
+            <!--  ~*~*~*~*~*~  SVG FOR X ~*~*~*~*~*~ --> 
+            <div class="gameBox" *ngIf="gameBoard.board[i][j] == 1" class="filledSpace gameBox" [class.highlightSpace]="highlightSpaces[i][j]" (click)="playerMove([i, j])">
+                <svg id="ticTacX" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.6 49.6"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_x</title><path class="cls-1" d="M51.45,7.48,46.3,2.33a.79.79,0,0,0-1.13,0L27.46,20a.81.81,0,0,1-1.14,0L8.61,2.33a.79.79,0,0,0-1.13,0L2.33,7.48a.79.79,0,0,0,0,1.13L20,26.32a.81.81,0,0,1,0,1.14L2.33,45.17a.79.79,0,0,0,0,1.13l5.15,5.15a.79.79,0,0,0,1.13,0L26.32,33.74a.81.81,0,0,1,1.14,0L45.17,51.45a.79.79,0,0,0,1.13,0l5.15-5.15a.79.79,0,0,0,0-1.13L33.74,27.46a.81.81,0,0,1,0-1.14L51.45,8.61A.79.79,0,0,0,51.45,7.48Z" transform="translate(-2.09 -2.09)"/></svg>
+            </div>
+            
+              <!--  ~*~*~*~*~*~  SVG FOR O ~*~*~*~*~*~ --> 
+            <div class="gameBox" *ngIf="gameBoard.board[i][j] == -1" class="filledSpace gameBox" [class.highlightSpace]="highlightSpaces[i][j]">
+              <svg id="ticTacO" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.78 53.78"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_0</title><path class="cls-1" d="M26.89,0A26.89,26.89,0,1,0,53.78,26.89,26.89,26.89,0,0,0,26.89,0Zm0,45.76A18.87,18.87,0,1,1,45.76,26.89,18.87,18.87,0,0,1,26.89,45.76Z" transform="translate(0 0)"/></svg></div>
+            <div *ngIf="gameBoard.board[i][j] == 0 && gameStarted" class="blankSpace" (click)="playerMove([i, j])">
+            
+          </div><!--closes blankSpace-->
+        </div><!--closes gameSpace-->
+      </div><!--closes gameRow-->
+    </div><!--closes gameboardContent-->
+  </div><!--closes gameboard-->
 </div><!-- closes gameBack-->
+
 <div class="scoreboard">
   <h2>SCOREBOARD</h2>
     <div class="scoreboardContent">
         
         <h3>
-          <!-- if player chooses X-->
+          <!--  ~*~*~*~*~*~  SVG ICON // IF USER IS X ~*~*~*~*~*~ --> 
           <span class="playerChoice" *ngIf="playerSide === 1 "><svg id="ticTacX" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.6 49.6"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_x</title><path class="cls-1" d="M51.45,7.48,46.3,2.33a.79.79,0,0,0-1.13,0L27.46,20a.81.81,0,0,1-1.14,0L8.61,2.33a.79.79,0,0,0-1.13,0L2.33,7.48a.79.79,0,0,0,0,1.13L20,26.32a.81.81,0,0,1,0,1.14L2.33,45.17a.79.79,0,0,0,0,1.13l5.15,5.15a.79.79,0,0,0,1.13,0L26.32,33.74a.81.81,0,0,1,1.14,0L45.17,51.45a.79.79,0,0,0,1.13,0l5.15-5.15a.79.79,0,0,0,0-1.13L33.74,27.46a.81.81,0,0,1,0-1.14L51.45,8.61A.79.79,0,0,0,51.45,7.48Z" transform="translate(-2.09 -2.09)"/></svg>
         </span>
-        <!-- if player chooses O-->
+        <!--  ~*~*~*~*~*~  SVG ICON // IF USER IS O ~*~*~*~*~*~ --> 
         <span class="playerChoice" *ngIf="playerSide === -1 "><svg id="ticTacO" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.78 53.78"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_0</title><path class="cls-1" d="M26.89,0A26.89,26.89,0,1,0,53.78,26.89,26.89,26.89,0,0,0,26.89,0Zm0,45.76A18.87,18.87,0,1,1,45.76,26.89,18.87,18.87,0,0,1,26.89,45.76Z" transform="translate(0 0)"/></svg>
         </span>
         <span class="player">Player : </span><span class="score">{{ playerWins }}</span> 
       </h3>
       <h3>
-        <!-- if computer side is X-->
+        <!--  ~*~*~*~*~*~  SVG ICON // IF COMPUTER IS X ~*~*~*~*~*~ --> 
           <span class="playerChoice" *ngIf="computerSide === 1 "><svg id="ticTacX" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.6 49.6"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_x</title><path class="cls-1" d="M51.45,7.48,46.3,2.33a.79.79,0,0,0-1.13,0L27.46,20a.81.81,0,0,1-1.14,0L8.61,2.33a.79.79,0,0,0-1.13,0L2.33,7.48a.79.79,0,0,0,0,1.13L20,26.32a.81.81,0,0,1,0,1.14L2.33,45.17a.79.79,0,0,0,0,1.13l5.15,5.15a.79.79,0,0,0,1.13,0L26.32,33.74a.81.81,0,0,1,1.14,0L45.17,51.45a.79.79,0,0,0,1.13,0l5.15-5.15a.79.79,0,0,0,0-1.13L33.74,27.46a.81.81,0,0,1,0-1.14L51.45,8.61A.79.79,0,0,0,51.45,7.48Z" transform="translate(-2.09 -2.09)"/></svg>
           </span>
-          <!-- if computer side is O-->
+
+          <!--  ~*~*~*~*~*~  SVG ICON // IF COMPUTER IS O ~*~*~*~*~*~ --> 
           <span class="playerChoice" *ngIf="computerSide === -1 "><svg id="ticTacO" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.78 53.78"><defs><style>.cls-1{fill:#231f20;}</style></defs><title>tictac_0</title><path class="cls-1" d="M26.89,0A26.89,26.89,0,1,0,53.78,26.89,26.89,26.89,0,0,0,26.89,0Zm0,45.76A18.87,18.87,0,1,1,45.76,26.89,18.87,18.87,0,0,1,26.89,45.76Z" transform="translate(0 0)"/></svg></span>
           <span class="player">Computer : </span><span class="score">{{ computerWins }}</span>
         </h3>
       <h3>
+          <!--  ~*~*~*~*~*~  SVG FOR DRAW ICON ~*~*~*~*~*~ --> 
           <span class="playerChoice drawGames" *ngIf=" computerSide === 1 || computerSide === -1 "><svg id=drawGraphic data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53.78 53.78"><defs><style></style></defs><title>xo</title><path class="cls-1" d="M51.45,46.3" transform="translate(0 0)"/><path class="cls-2" d="M27.46,20,36.7,10.8A18.83,18.83,0,0,0,10.8,36.7L20,27.46Z" transform="translate(0 0)"/><path class="cls-2" d="M26.32,33.74,17.08,43A18.83,18.83,0,0,0,43,17.08l-9.24,9.24Z" transform="translate(0 0)"/><path class="cls-3" d="M8,26.89A18.83,18.83,0,0,1,36.7,10.8L42.5,5A26.88,26.88,0,0,0,5,42.5l5.8-5.8A18.73,18.73,0,0,1,8,26.89Z" transform="translate(0 0)"/><path class="cls-3" d="M48.78,11.28,43,17.08A18.83,18.83,0,0,1,17.08,43l-5.8,5.8a26.88,26.88,0,0,0,37.5-37.5Z" transform="translate(0 0)"/><path class="cls-1" d="M48.78,11.28l2.67-2.67a.79.79,0,0,0,0-1.13L46.3,2.33a.79.79,0,0,0-1.13,0L42.5,5A27.13,27.13,0,0,1,48.78,11.28Z" transform="translate(0 0)"/><path class="cls-1" d="M36.7,10.8,27.46,20,20,27.46,10.8,36.7A18.86,18.86,0,0,0,17.08,43l9.24-9.24,7.42-7.42L43,17.08A18.86,18.86,0,0,0,36.7,10.8Z" transform="translate(0 0)"/><path class="cls-1" d="M5,42.5,2.33,45.17a.79.79,0,0,0,0,1.13l5.15,5.15a.79.79,0,0,0,1.13,0l2.67-2.67A27.13,27.13,0,0,1,5,42.5Z" transform="translate(0 0)"/><path class="cls-1" d="M10.8,36.7,5,42.5a27.13,27.13,0,0,0,6.28,6.28l5.8-5.8A18.86,18.86,0,0,1,10.8,36.7Z" transform="translate(0 0)"/><path class="cls-1" d="M43,17.08l5.8-5.8A27.13,27.13,0,0,0,42.5,5l-5.8,5.8A18.86,18.86,0,0,1,43,17.08Z" transform="translate(0 0)"/></svg>
           </span><span class="player">Draws : </span><span class="score">{{ drawGames }}</span>
       </h3>
@@ -61,22 +59,42 @@
     <button id="resetButton" (click)="resetGame()"><span class="resetText">Reset</span></button>
   </div><!--closes scoreboard-->
  
+<!-- ~*~*~*~*~*~ COMPUTER OR PLAYER WIN MESSAGE ~*~*~*~*~*~ -->
 <div id="playButton" [ngClass]="{'hide': !gameOver }">
+  <h4 id="winResultMessage">{{ winnerMessage }}</h4>
   <div class="attention">
-<button id="playAgain" [ngClass]="{'hide': !gameOver }" (click)="resetGame()">Play Again?</button>
-</div><!--closes attention-->
+    <button id="playAgain" [ngClass]="{'hide': !gameOver }" (click)="resetGame()">Play Again <span class="orange">?</span></button>
+  </div><!--closes attention-->
 </div><!--closes playButton -->
+
+
+<!-- ~*~*~*~*~*~ DRAW MESSAGE ~*~*~*~*~*~ -->
+<div id="playButton" [ngClass]="{'hide': winnerMessage != 'Draw!' }">
+  <h4 id="winResultMessage">{{ winnerMessage }}</h4>
+  <div class="attention">
+    <button id="playAgain" (click)="resetGame() ; resetWinnerMessage()">Play Again <span class="orange">?</span></button>
+  </div><!--closes attention-->
+</div><!--closes playButton -->
+
+
+<!-- ~*~*~*~*~*~ CHOOSE PLAYER BUTTONS ~*~*~*~*~*~ -->
 <div id="pickPlayer" [ngClass]="{'hide': gameStarted}">
   <div class="attention" [ngClass]="{'hide': gameStarted} ">
-      <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsX()"><span class="playgameas">Play Game as :</span><span class="red"> X</span></button>
-      <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsO()"><span class="playgameas">Play Game as :</span><span class="red"> O</span> </button>
-      
+      <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsX()">
+        <span class="playgameas">Play Game as :</span>
+        <span class="red"> X</span>
+      </button>
+      <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsO()">
+        <span class="playgameas">Play Game as :</span>
+        <span class="red"> O</span>
+      </button>
     </div><!--closes attention-->
   </div><!--closes pickPlayer-->
-</div>
+</div><!-- closes container-->
 
+<!-- pop up alert for LANDSCAPE view-->
+<!-- <div id ="landscapeAlert">
+  <span class="whoa">Whoa...</span>
+  <p id="landscapeAlertMessage">Please turn your screen back around to portrait mode. Thanks!</p>
+</div> -->
 
-<!-- <div>
-    <button *ngIf="!gameStarted" (click)="startGameAsX()">Play Game as X</button>
-    <button *ngIf="!gameStarted" (click)="startGameAsO()">Play Game as O</button>
-    </div> -->

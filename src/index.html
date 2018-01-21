@@ -24,8 +24,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
-      $('body').bind('touchstart', function(){})
-    })
+      $('body').bind('touchstart touchend', function(){});
+      $('div.gameSpace').on("click mousedown mouseup focus blur keydown change", function(e){
+        console.log(this);
+        console.log('***** ****** ***** *****');
+        console.log(e.currentTarget);
+        console.log(e.target);
+
+        
+       
+      })
+    
+        
+  
+  
+});
+      
+    
+   
+       
+    
   </script>
 
 </head>

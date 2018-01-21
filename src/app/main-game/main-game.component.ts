@@ -10,7 +10,7 @@ import { GameResult } from '../game-result';
   styleUrls: ['./main-game.component.css']
 })
 export class MainGameComponent implements OnInit {
-
+  winnerMessage='';
   highlightSpaces:boolean[][];
   gameBoard:GameBoard = new GameBoard();
   playerWins:number;
@@ -123,6 +123,10 @@ export class MainGameComponent implements OnInit {
 
   }
 
+  resetWinnerMessage() {
+    this.winnerMessage = '';
+  }
+  
   resetGame() {
     this.currGame = [];
     this.gameBoard.resetBoard();
@@ -138,10 +142,13 @@ export class MainGameComponent implements OnInit {
     // console.log(result);
     if(result.winner == 0) {
       this.drawGames++;
+      this.winnerMessage = 'Draw!';
     } else if(result.winner == this.playerSide) {
       this.playerWins++;
+      this.winnerMessage = 'You Won!';
     } else {
       this.computerWins++;
+      this.winnerMessage = 'Try Again!';
     }
     for(let i = 0; i < result.winningSpaces.length; i++) {
       this.highlightSpaces[result.winningSpaces[i][0]][result.winningSpaces[i][1]] = true;
