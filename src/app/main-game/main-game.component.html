@@ -16,12 +16,19 @@
   <div class="attention" [ngClass]="{'hide': gameStarted} ">
       <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsX()"><span class="playgameas">Play Game as :</span><span class="red"> X</span></button>
       <button [ngClass]="{'hide': gameStarted }"  (click)="startGameAsO()"><span class="playgameas">Play Game as :</span><span class="red"> O</span> </button>
+      <button [ngClass]="{'hide': gameStarted && !gameOver }" (click)="resetGame()">Reset Game</button>
+      <button [ngClass]="{'hide': gameStarted && gameOver }" (click)="resetGame()">Play Again?</button>
     </div>
   </div><!-- closes wrapper-->
   <div class="gameBack">
   <div class="gameboard">
     <div class="gameboardContent">
     <div *ngFor="let row of gameBoard.board; index as i" class="gameRow">
+      <!-- example of highlightSpaces array
+      <div *ngFor="let column of row; index as j"  class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
+        <h1 *ngIf="gameBoard.board[i][j] == 1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">X</h1>
+        <h1 *ngIf="gameBoard.board[i][j] == -1" class="filledSpace" [class.highlightSpace]="highlightSpaces[i][j]">O</h1>
+      -->
       <div *ngFor="let column of row; index as j" class="gameSpace row{{ i }} col{{ j }}" id="{{ i }}_{{ j }}" >
         
         <!--div containing svg for "x" // replaces h3-->
