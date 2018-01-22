@@ -113,7 +113,7 @@ export class GameBoard {
         }
 
         for(let i = 0; i < colSums.length; i++) {
-            if(Math.abs(colSums[i]) == 2 * currentSide) {
+            if(Math.abs(colSums[i]) == 2) {
                 for(let j = 0; j < this.board.length; j++) {
                     if(this.board[j][i] == 0 ) {
                         return [j, i];
