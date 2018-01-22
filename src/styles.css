@@ -241,6 +241,7 @@ svg {
 } */
 
 #resetButton {
+    cursor: pointer;
     background-color: rgb(219, 84, 30);
     border: 2px solid rgb(219, 84, 30);
     border-radius: 14px;
@@ -263,7 +264,7 @@ svg {
 }
 
 #resetButton:hover {
-     
+     cursor: pointer;
     background-color: rgba(30,30,30,1);
     border: 2px solid rgba(30,30,30,1);;
     color: rgb(219, 84, 30);
