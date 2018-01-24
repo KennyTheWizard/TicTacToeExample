@@ -1,91 +1,115 @@
-/* You can add global styles to this file, and also import other style files */
+
 
 
 body {
     text-align:center;
     height: 100vh;
     width: 100vw;
-    background-color: #ececec !important;
+    background: linear-gradient(#ececec, #eee) !important;
     color: #1e1e1e;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.container {
 
-}
+
 .scoreboardContain {
     width: 0px;
     height: 0px;
 }
+
+
+/* prevent mobile devices from attempting to highlight text when a user touches elements like buttons  */
+h1, h2, h3, button, .gameBox, .gameSpace
+.blankSpace, div{
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    
+}
+
+
+/* smooth transitions on hover/touch effects  */
+.playgameas, 
+button:hover .playgameas, 
+.red::after, .red::before, 
+button, button.hide, .attention.hide, 
+.red, button:hover .red, 
+button:hover .red::before, 
+button:hover .red::after, 
+.gameBox:hover #ticTacO .cls-1, .cls-1, #ticTacX, 
+.playerChoice {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    
+}
+
+
+#resetButton, #resetButton:hover, .resetText, 
+.scoreboard h3, .scoreboard h3:hover,
+.scoreboard h3:hover .player, .player,
+.scoreboard  svg, .orange, .playAgain:hover .orange
+{
+    transition: all 0.2s ease !important;
+    -webkit-transition: all 0.2s ease!important;
+    -moz-transition: all 0.2s ease !important;
+    -o-transition: all 0.2s ease !important;
+
+}
+.gameSpace, .gameSpace:hover {
+    transition: all 0.1s ease !important;
+    -webkit-transition: all 0.1s ease!important;
+    -moz-transition: all 0.1s ease !important;
+    -o-transition: all 0.1s ease !important;
+}
+
+svg, #playButton, #pickPlayer { 
+    animation: fadeIn .3s ease 1;
+    -webkit-animation: fadeIn .3s ease 1;
+    -moz-animation: fadeIn .3s ease 1;
+    -o-animation: fadeIn .3s ease 1;  
+}
+
+
+
+.headerContain {
+    text-align:left;
+}
+
+
 h1 {
-    margin: 0 0 0 0;
+    display:inline-block;
+    margin: 0 0 0 0 !important;
+    font-size: 4vh !important;
+    color: #f7f7f7;
+    background-color: #1e1e1e;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    padding: 6vh 1vh 1vh 1vh;
+    line-height:4.5vh;
+    letter-spacing:-1px;
+    text-transform: lowercase !important;
+    text-align:center;
+}
+
+.tic, .tac, .toe {
+    display: inline-block;
+    
 }
 
 span.tacSlash {
     color: rgb(255,91,25);
     font-weight: 100;
-    margin: 1%;
+    display: inline-block;
+ 
 }
-
- .playgameas, button:hover .playgameas, .red::after, .red::before, .scoreboard h3, .scoreboard h3:hover, button, button.hide, .attention.hide, .red, button:hover .red, .gameBox:hover #ticTacO .cls-1, .cls-1, #ticTacX {
-    transition: all 0.3s ease;
-}
-
-#resetButton, #resetButton:hover, .resetText{
-    transition: all 0.1s ease !important;
-
-}
-.wrapper {
-    display:inline-block;
-    width: 30vh;
-    max-width:250px;
-    vertical-align: top;
-}
-.hcontain {
-    text-align: left;
-    /* border-left: 1px solid rgba(30,30,30,.1);
-    border-right: 1px solid rgba(30,30,30,.1);
-    border-bottom: 1px solid rgba(30,30,30,.1); */
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    
-    overflow: hidden;
-    
-    
-}
-h1 {
-    text-align: left;
-    display:inline-block;
-    margin: 0 0 0 0 !important;
-    font-size: 5vh !important;
-    color: #f7f7f7;
-    background-color: #1e1e1e;
-    border-bottom-left-radius:10px;
-    border-bottom-right-radius:10px;
-    /* border-bottom:1px solid rgb(255, 91, 25); */
-    padding: 7vh 2vh 1vh 2vh;
-    line-height:4.5vh;
-    box-sizing: border-box;
-    letter-spacing:0px;
-    text-transform: lowercase !important;
-}
-
 .gameboard, .row1, .col1, .gameRow, .gameSpace, .blankSpace {
     box-sizing: border-box;
 }
 
 
-.playerChoice{
-    max-width:1.5vh;
-    font-size:3vh;
-    margin-right: 1.5vh;
-    font-size: 2vh;
-    color: rgba(0,0,0,.3);
-}
 
-.playerChoice svg {
-    vertical-align: middle;
-}
 .scoreboard {
     text-align: left !important;
     font-size:11px;
@@ -97,20 +121,16 @@ h1 {
     background: rgba(221,221,221,.7);
     margin-top:2vh;
     white-space: nowrap;
-    
 }
-.margins {
-    margin-left: 5.5vh !important;
-}
+
 .scoreboardContent {
+    margin-top:1%;
     display: inline-block;
     position: relative;
     width:77%;
 }
 
-svg {
-    animation: fadeIn .4s ease 1;
-}
+
 .scoreboard h2 {
     background-color: #1e1e1e;
     color: #f7f7f7;
@@ -137,9 +157,86 @@ svg {
     
 }
 
-.scoreboard  svg#ticTacX, .scoreboard svg#ticTacO {
+
+
+.scoreboard  svg {
     max-width:1.5vh;
+    padding:0;
+    box-sizing: border-box;
+
+
+
 }
+
+
+div#map {
+    display: block !important;
+    height: 100vw !important;
+    height: 100vh !important;
+}
+
+.map[_ngcontent-c0] {
+    display: block !important;
+    width: 100vw !important;
+    height:100vh !important;
+}
+
+/* 'player' selectors for player titles in scoreboard box */
+
+.player {
+    padding: 0 0 0 0;
+}
+
+.scoreboard h3:hover .player {
+    padding-left:.5vh;
+    line-height: 3.5vh;
+    color: rgba(0,0,0,1);
+   
+}
+
+
+/* 'playerChoice' is the span that wraps the scoreboard svgs */
+
+.playerChoice{
+    max-width:1.6vh;
+    font-size:3vh;
+    margin-right: .5vh;
+    font-size: 2vh;
+    color: rgba(0,0,0,.3);
+}
+
+.playerChoice svg {
+    vertical-align: middle;
+
+    
+}
+
+/* styling the draw icon */
+.drawGames .cls-1 {
+    fill: rgb(255, 91, 25);
+
+}
+
+.drawGames .cls-2 {
+    fill: none;
+}
+
+.drawGames .cls-3 {
+    fill: rgb(30,30,30);
+}
+
+
+/* hover effects for scoreboard svgs */
+
+.scoreboard h3 svg {
+    opacity: .7;
+    padding: 0 0 0 0;
+}
+.scoreboard h3:hover svg{
+    opacity: 1;
+}
+
+
 .scoreboard h3:last-of-type{
     border-bottom: 0px !important;
 }
@@ -158,7 +255,7 @@ svg {
 }
 
 .wrapper, .gameBack {
-    margin-top:9vh;
+    margin-top:5vh;
 }
 
 .gameBack {
@@ -172,7 +269,7 @@ svg {
     position:relative;
     min-width: 300px;
     width: 90vw;
-    max-width:700px;
+    max-width:550px;
     white-space:nowrap;
     margin: 0 auto;
     overflow:hidden;
@@ -204,24 +301,32 @@ svg {
 
 .gameBox:hover #ticTacO .cls-1, .gameBox:hover #ticTacX .cls-1 {
     fill: rgb(255,255,255);
+ 
+
 }
 
-#ticTacX .cls-1{
+.gameBox #ticTacO, .gameBox #ticTacX {
+
+}
+
+.gameBox:hover #ticTacO, .gameBox:hover #ticTacX {
+    -webkit-filter: drop-shadow( 0 0 1px rgba(255,255,255,.5) ) !important; 
+    filter: drop-shadow( 0 0 2px rgba(255,255,255,.3)) !important;
+}
+ #ticTacX .cls-1{
     fill: rgb(255, 91, 25);
+    
    
     
 }
 
-#ticTacO .cls-1 {
-    
-}
 .attention {
+    border: 2px solid rgba(0,0,0,0);
     animation: blink .5s ease infinite;
     -webkit-animation: blink .5s ease infinite;
     -moz-animation: blink .5s ease infinite;
     -o-animation: blink .5s ease infinite;      
     padding: 2.5vh 2vh 2.5vh 2vh;
-    margin-top: 2vh;
     border-radius: 10px;
     min-width: 300px;
     width: 40vw;
@@ -229,6 +334,36 @@ svg {
     display: inline-block;
     margin-top: 38vh;
 }
+
+#playButton .attention {
+    margin-top: -4vh !important;
+}
+
+#playButton h4#winResultMessage {
+    margin-top:34vh;
+}
+
+h4#winResultMessage {
+    color: rgba(255, 91, 25, 1);
+    font-family: 'ganache' !important;
+    font-size: 8vh !important;
+    transform : rotate(-15deg);
+   -webkit-text-stroke-color: rgba(201, 74, 24,1);
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: rgba(201, 74, 24, 0.52);
+   text-shadow: 2px 2px 0px rgba(30,30,30,1);
+   
+}
+
+/* #winResultMessage{
+color: rgba(219, 84, 30,1) !important;
+font-family: "ganache" !important;
+font-size: 8vh !important;
+transform: rotate(-15deg) !important;
+-webkit-text-stroke-width: .0001em !important;
+-webkit-text-stroke-color: #00000000 !important;
+text-shadow: 3px 3px 0 #000000a1, -1px -1px 0 #0000, 1px -1px 0 #0000, -1px 1px 0 #0000, 1px 1px 0 #000 !important;
+} */
 
 .resetText {
     padding-bottom: .15vh;
@@ -257,32 +392,29 @@ svg {
     min-width: 20%;
     max-width: 20%;
     font-size: 1.5vh !important;
-    /* -moz-box-shadow:   0 0 1px rgba(0,0,0,.4);
+    -moz-box-shadow:   0 0 1px rgba(0,0,0,.4);
     -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4);
-    box-shadow:         0 0 1px rgba(0,0,0,.4); */
+    box-shadow:         0 0 1px rgba(0,0,0,.4);
 
 }
 
-#resetButton:hover {
-     cursor: pointer;
+#resetButton:hover, #resetButton:active {
+     
     background-color: rgba(30,30,30,1);
-    border: 2px solid rgba(30,30,30,1);;
+    border: 2px solid rgb(219, 84, 30);
     color: rgb(219, 84, 30);
 
 }
 
 
 
-#resetButton:hover .resetText {
+#resetButton:hover .resetText, #resetButton:active .resetText {
     
     border-bottom: none !important;
     color: rgb(219, 84, 30);
 }
 
-#resetButton:active {
-    background-color: rgb(219, 84, 30);
-    border:2px solid rgb(219, 84, 30);
-}
+
 button {
     opacity:1;
     color: #f7f7f7;
@@ -293,12 +425,13 @@ button {
     border: 1px solid #1e1e1e;
     margin:0 0 0 0;
     text-transform: uppercase !important;;
-    font-size: 1.5vh !important;
+    font-size: 1.45vh !important;
     letter-spacing: 2px;
     font-weight: 600;
     display: block;
     width:100%;
     height:5vh;
+    min-height:40px;
     box-sizing: border-box;
 }
 
@@ -322,10 +455,11 @@ button:hover {
 
 .playgameas {
     line-height: 5vh;
+    min-height:60px;
 }
 
 button:hover .playgameas {
-    color: rgba(255,255,255,.8) !important;
+    color: rgba(255,255,255,.9) !important;
   
 }
 .red {
@@ -340,18 +474,24 @@ button:hover .playgameas {
 .red::before {
     content: '[';
     color: rgba(255, 91, 25, 0);
+    padding: 0 0 0 0;
+    
 }
 
 .red::after {
     content: ' ]';
     color: rgba(255, 91, 25, 0);
+    padding: 0 0 0 0;
+   
 }
 
-button:hover .red {
-    color: rgb(255,255,255) !important;
+button:hover .red, button:active .red {
+    color: rgba(255,255,255,1) !important;
+    -webkit-filter: drop-shadow( 0 0 1px rgba(255,255,255,.5) ) !important; 
+    filter: drop-shadow( 0 0 2px rgba(255,255,255,.3)) !important;
 }
 
-button:hover .red::after, button:hover .red::before {
+button:hover .red::after, button:hover .red::before, button:active .red::after, button:active .red::before {
 color: rgba(255, 91, 25, 1);
 display: inline-block;
 padding: 0 1.1vh 0.5vh 1.1vh;
@@ -359,9 +499,7 @@ margin-left: 1vh;
 font-size:1.75vh;
 }
 
-button:active {
-    background-color: rgb(255, 91, 25)
-}
+
 
 button.hide, .attention.hide{
     opacity: 0;
@@ -384,13 +522,12 @@ button.hide:first-of-type {
     margin-bottom: 0px !important;
 }
 
-.gameSpace[_ngcontent-c1]{
+.gameSpace{
     width: 32.333% !important;
     height: 100% !important ;
     display: inline-block;
     text-align: center;
     vertical-align: top;
-    transition: all 0.1s ease;
     background: rgba(221,221,221,1);
     margin-right: 1% !important;
     border-radius:15px;
@@ -402,13 +539,16 @@ button.hide:first-of-type {
     
 
 }
+
+
+
 #playButton.hide, #pickPlayer.hide {
     display:none;
 }
 
 #playButton, #pickPlayer {
     display:block;
-    background-color: rgba(255,255,255,.3);
+    background-color: rgba(255,255,255,.5);
     position: absolute;
     top: 0;
     left: 0;
@@ -429,6 +569,14 @@ button.hide:first-of-type {
     
 }
 
+.orange {
+    color: rgb(219, 84, 30);
+}
+
+#playAgain:hover .orange{
+    color: rgb(255,255,255);
+}
+
 #playAgain.hide {
     animation: none !important;
 }
@@ -437,13 +585,19 @@ button.hide:first-of-type {
     margin-right: 0px !important;
 }
 
-.gameSpace:hover {
+.gameSpace:hover, #playAgain:hover, .attention button:hover  {
     background-color: rgba(30, 30, 30, .9);
-    transition: all 0.1s ease;
     -moz-box-shadow:    inset 0 0 20px rgba(0,0,0,1);
     -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,1);
     box-shadow:         inset 0 0 20px rgba(0,0,0,1);
 }
+
+.back {
+    background: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+
 
 .blankSpace {
     margin: 0 0 0 0;
@@ -453,7 +607,7 @@ button.hide:first-of-type {
     box-sizing: border-box;
 }
 
-.filledSpace.gameBox.highlightSpace {
+.highlightSpace {
     
     animation: winning .4s ease 1;
     
@@ -464,7 +618,114 @@ button.hide:first-of-type {
 
 .filledSpace.gameBox.highlightSpace .cls-1 {
     fill: rgba(255,255,255,1) !important;
+    -webkit-filter: drop-shadow( 0 0 1px rgba(255,255,255,.5) ) !important; 
+    filter: drop-shadow( 0 0 2px rgba(255,255,255,.3)) !important;
+ 
 }
+
+#landscapeAlert {
+    display: none;
+}
+
+
+
+
+
+/* force portrait mode */
+/* @media (orientation: landscape) {
+    body {
+        background-color: #f7f7f7;
+    }
+    .container {
+        min-width:75vw;
+        width:75vw;
+    }
+
+    button, #playAgain, .red::before, .red::after, .playgameas, .red {
+        font-size: 3.5vh !important;
+    }
+    
+    h1 {
+        font-size :8vh !important;
+        line-height: 9.5vh !important;
+        padding:4vh 2vh 2vh 2vh !important;
+    }
+    
+    .gameboard {
+        min-width: 250px;
+        width: 50vh !important;
+       
+    }
+    
+    
+    .scoreboard {
+    
+    width: 30vw;
+    float: left;
+    display: inline-block;
+    }
+    
+    .scoreboardContent {
+        width: 70%;
+    }
+    
+    .scoreboard h2 {
+        line-height: 7vh;
+    font-size: 2.5vh !important;;
+    }
+    
+    .scoreboard h3 {
+        font-size: 2.65vh !important;
+        line-height: 5.5vh;
+    }
+    
+    #resetButton {
+        border-radius: 9px;
+    max-width: 26%;
+    min-height: 100%;
+    width: 26%;
+    height: 9vw;
+        
+    
+    }
+    
+    
+    .gameBack {
+        float:right;
+        margin-top: 2vh;
+    
+    } */
+ 
+    /* .container {
+        display: none;
+    }
+
+    .whoa {
+        color: rgb(219, 84, 30);
+        font-size:4vw;
+        font-weight:800;
+       
+    }
+    p#landscapeAlertMessage {
+        color: rgb(30,30,30);
+        font-weight:600;
+
+    }
+    #landscapeAlert {
+        display:block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left:0;
+        right: 0;
+        bottom: 0;
+        padding-top:10%;
+    } */
+
+  /* } */
+
+
 
 @keyframes winning{0%{background-color: rgba(30,30,30,1)}50%{background-color: rgba(255, 91, 25, 1)}100%{background-color: rgba(225,225,255,1)}}
 
@@ -478,6 +739,15 @@ button.hide:first-of-type {
 @-moz-keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
 @-webkit-keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
 @keyframes fadeIn{0%{opacity: 0;} 100%{opacity: 1;}}
+
+
+
+@-ms-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@-moz-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@-webkit-keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+@keyframes bump{0%{opacity: 1;} 50%{opacity: .5;} 100%{opacity:1;}}
+
+
 
 @-ms-keyframes wiggle{0%{-ms-transform:rotate(1deg);}50%{-ms-transform:rotate(-1deg);}100%{-ms-transform:rotate(1deg);}}
 @-moz-keyframes wiggle{0%{-moz-transform:rotate(1deg);}50%{-moz-transform:rotate(-1deg);}100%{-moz-transform:rotate(1deg);}}
