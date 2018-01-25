@@ -89,6 +89,7 @@ export class MainGameComponent implements OnInit {
     if(this.processingMove) {
       return;
     }
+    this.getNextMove();
     this.makeMove(move, this.playerSide);
     if (this.gameStarted && !this.gameOver) {
       this.processingMove = true;
@@ -120,7 +121,7 @@ export class MainGameComponent implements OnInit {
         }
       }
     }
-
+    console.log(this.dataBaseList);
   }
 
   resetWinnerMessage() {
@@ -225,7 +226,7 @@ export class MainGameComponent implements OnInit {
     }
 
     let pickrnd = Math.floor(Math.random() * possibleMoves.length);
-
+    console.log(currState);
     return possibleMoves[pickrnd];
   }
 }
