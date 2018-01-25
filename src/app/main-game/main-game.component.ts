@@ -98,7 +98,7 @@ export class MainGameComponent implements OnInit {
   }
   saveGameResults(result:GameResult) {
 
-    
+    // save the results into the "database" array.
     for(let i = 0; i < this.currGame.length; i++) {
       let checkBoard = new GameBoard();
       checkBoard.board = this.currGame[i].boardState;
@@ -178,6 +178,7 @@ export class MainGameComponent implements OnInit {
 
     let currState:GameState;
     // console.log(JSON.stringify(currState));
+    // try to find the current board position
     for(let i = 0; i < this.dataBaseList.length; i++) {
       if(this.gameBoard.isEqual(this.dataBaseList[i].boardState)) {
         currState = this.dataBaseList[i]
@@ -186,7 +187,7 @@ export class MainGameComponent implements OnInit {
     }
     // console.log("Found currState: " + JSON.stringify(currState));
     if(!currState){
-
+      // if you don't find it create it
       currState = new GameState();
       currState.boardState = this.gameBoard.getCloneBoard();
       currState.moveList = [];
@@ -197,6 +198,9 @@ export class MainGameComponent implements OnInit {
       this.dataBaseList.push(currState);
       // // console.log(JSON.stringify(this.dataBaseList));
     }
+
+    // make sure there isn't a winning or blocking move to reduce game
+    // positions.
     let winMove = this.gameBoard.getWinMove(this.computerSide);
     if(winMove) {
       return winMove;
@@ -226,7 +230,6 @@ export class MainGameComponent implements OnInit {
     }
 
     let pickrnd = Math.floor(Math.random() * possibleMoves.length);
-    console.log(currState);
     return possibleMoves[pickrnd];
   }
 }
