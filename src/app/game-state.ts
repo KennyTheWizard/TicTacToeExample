@@ -1,7 +1,6 @@
 import { MoveScore } from './move-score';
 
 export class GameState {
-    boardState:number[][];
-    moveList:MoveScore[];
-
+    boardState: number[][] = [];
+    moveList: MoveScore[] = [];
 }

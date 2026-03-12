@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { GameBoard } from '../game-board';
 import { GameState } from '../game-state';
 import { MoveScore } from '../move-score';
@@ -6,37 +7,37 @@ import { GameResult } from '../game-result';
 
 @Component({
   selector: 'app-main-game',
+  imports: [CommonModule],
   templateUrl: './main-game.component.html',
-  styleUrls: ['./main-game.component.css']
+  styleUrl: './main-game.component.css'
 })
 export class MainGameComponent implements OnInit {
-  winnerMessage='';
-  highlightSpaces:boolean[][];
-  gameBoard:GameBoard = new GameBoard();
-  playerWins:number;
-  computerWins:number;
-  drawGames:number;
-  currGame:GameState[];
-  dataBaseList:GameState[];
-  playerSide:number;
-  computerSide:number;
-  gameStarted:boolean;
-  gameOver:boolean;
-  processingMove:boolean;
-
-  constructor() { }
+  private cdr = inject(ChangeDetectorRef);
+  winnerMessage = '';
+  highlightSpaces: boolean[][] = [];
+  gameBoard: GameBoard = new GameBoard();
+  playerWins = 0;
+  computerWins = 0;
+  drawGames = 0;
+  currGame: GameState[] = [];
+  dataBaseList: GameState[] = [];
+  playerSide = 0;
+  computerSide = 0;
+  gameStarted = false;
+  gameOver = false;
+  processingMove = false;
 
   ngOnInit() {
     this.gameBoard.board = [
       [0, 0, 0],
       [0, 0, 0],
       [0, 0, 0],
-    ]
+    ];
     this.highlightSpaces = [
       [false, false, false],
       [false, false, false],
       [false, false, false],
-    ]
+    ];
     this.dataBaseList = [];
     this.currGame = [];
     this.playerWins = 0;
@@ -45,28 +46,6 @@ export class MainGameComponent implements OnInit {
     this.gameStarted = false;
     this.gameOver = false;
     this.processingMove = false;
-    // let count = 0;
-    // while(count < 10) {
-
-    //   let player = 1;
-    //   let result = this.gameBoard.getResult();
-    //   while(!result.gameOver) {
-    //     let nextMove = this.getNextMove();
-    //     let winMove = this.gameBoard.getWinMove();
-    //     if(winMove) {
-    //       this.makeMove(winMove, player);
-    //     } else {
-    //       this.makeMove(nextMove, player);
-    //     }
-    //     player = - player;
-    //     result = this.gameBoard.getResult();
-    //   }
-    //   this.processEndGame(result);
-    //   count++;
-    // }
-    // console.log(this.dataBaseList);
-    
-
   }
 
   startGameAsX() {
@@ -82,36 +61,33 @@ export class MainGameComponent implements OnInit {
     this.makeMove(this.getNextMove(), this.computerSide);
   }
 
-  playerMove(move:number[]) {
-    if(this.gameOver) {
-      return;
-    }
-    if(this.processingMove) {
+  async playerMove(move: number[]) {
+    if (this.gameOver || this.processingMove) {
       return;
     }
     this.getNextMove();
     this.makeMove(move, this.playerSide);
     if (this.gameStarted && !this.gameOver) {
       this.processingMove = true;
-      setTimeout(() => {this.makeMove(this.getNextMove(), this.computerSide)}, 1000);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      this.makeMove(this.getNextMove(), this.computerSide);
+      this.cdr.markForCheck();
     }
   }
-  saveGameResults(result:GameResult) {
 
-    // save the results into the "database" array.
-    for(let i = 0; i < this.currGame.length; i++) {
-      let checkBoard = new GameBoard();
+  saveGameResults(result: GameResult) {
+    for (let i = 0; i < this.currGame.length; i++) {
+      const checkBoard = new GameBoard();
       checkBoard.board = this.currGame[i].boardState;
-      for(let j = 0; j < this.dataBaseList.length; j++) {
-        if(checkBoard.isEqual(this.dataBaseList[j].boardState)) {
-          for(let k = 0; k < this.dataBaseList[j].moveList.length; k++) {
-            let checkMove = this.currGame[i].moveList[0].move;
-            let dataMove = this.dataBaseList[j].moveList[k].move;
-            // console.log(JSON.stringify(checkMove), JSON.stringify(dataMove));
-            if(checkMove[0] == dataMove[0] && checkMove[1] == dataMove[1]) {
-              if(this.currGame[i].moveList[0].score == result.winner) {
+      for (let j = 0; j < this.dataBaseList.length; j++) {
+        if (checkBoard.isEqual(this.dataBaseList[j].boardState)) {
+          for (let k = 0; k < this.dataBaseList[j].moveList.length; k++) {
+            const checkMove = this.currGame[i].moveList[0].move;
+            const dataMove = this.dataBaseList[j].moveList[k].move;
+            if (checkMove[0] == dataMove[0] && checkMove[1] == dataMove[1]) {
+              if (this.currGame[i].moveList[0].score == result.winner) {
                 this.dataBaseList[j].moveList[k].score++;
-              } else if(result.winner == 0) {
+              } else if (result.winner == 0) {
                 this.dataBaseList[j].moveList[k].drawCount++;
               } else {
                 this.dataBaseList[j].moveList[k].score--;
@@ -121,13 +97,12 @@ export class MainGameComponent implements OnInit {
         }
       }
     }
-    console.log(this.dataBaseList);
   }
 
   resetWinnerMessage() {
     this.winnerMessage = '';
   }
-  
+
   resetGame() {
     this.currGame = [];
     this.gameBoard.resetBoard();
@@ -137,99 +112,94 @@ export class MainGameComponent implements OnInit {
       [false, false, false],
       [false, false, false],
       [false, false, false],
-    ]
+    ];
   }
-  processEndGame(result:GameResult) {
-    // console.log(result);
-    if(result.winner == 0) {
+
+  processEndGame(result: GameResult) {
+    if (result.winner == 0) {
       this.drawGames++;
       this.winnerMessage = 'Draw!';
-    } else if(result.winner == this.playerSide) {
+    } else if (result.winner == this.playerSide) {
       this.playerWins++;
       this.winnerMessage = 'You Won!';
     } else {
       this.computerWins++;
       this.winnerMessage = 'Try Again!';
     }
-    if(result.winningSpaces) {
-
-      for(let i = 0; i < result.winningSpaces.length; i++) {
+    if (result.winningSpaces) {
+      for (let i = 0; i < result.winningSpaces.length; i++) {
         this.highlightSpaces[result.winningSpaces[i][0]][result.winningSpaces[i][1]] = true;
       }
     }
     this.saveGameResults(result);
-    this.gameOver=true;
+    this.gameOver = true;
   }
-  makeMove(theMove:number[], player:number){
-    let currState:GameState = new GameState();
+
+  makeMove(theMove: number[], player: number) {
+    const currState = new GameState();
     currState.boardState = this.gameBoard.getCloneBoard();
     currState.moveList = [new MoveScore(theMove, player)];
     this.currGame.push(currState);
     this.gameBoard.board[theMove[0]][theMove[1]] = player;
-    let result = this.gameBoard.getResult();
+    const result = this.gameBoard.getResult();
     this.processingMove = false;
-    console.log(result);
     if (result.gameOver) {
       this.processEndGame(result);
     }
   }
-  
-  getNextMove():number[] {
 
-    let currState:GameState;
-    // console.log(JSON.stringify(currState));
-    // try to find the current board position
-    for(let i = 0; i < this.dataBaseList.length; i++) {
-      if(this.gameBoard.isEqual(this.dataBaseList[i].boardState)) {
-        currState = this.dataBaseList[i]
+  getNextMove(): number[] {
+    let currState: GameState | undefined;
+
+    for (let i = 0; i < this.dataBaseList.length; i++) {
+      if (this.gameBoard.isEqual(this.dataBaseList[i].boardState)) {
+        currState = this.dataBaseList[i];
         break;
       }
     }
-    // console.log("Found currState: " + JSON.stringify(currState));
-    if(!currState){
-      // if you don't find it create it
+
+    if (!currState) {
       currState = new GameState();
       currState.boardState = this.gameBoard.getCloneBoard();
       currState.moveList = [];
-      let movesList = this.gameBoard.getMoves();
-      for(let i = 0; i < movesList.length; i++){
+      const movesList = this.gameBoard.getMoves();
+      for (let i = 0; i < movesList.length; i++) {
         currState.moveList.push(new MoveScore(movesList[i]));
       }
       this.dataBaseList.push(currState);
-      // // console.log(JSON.stringify(this.dataBaseList));
     }
 
-    // make sure there isn't a winning or blocking move to reduce game
-    // positions.
-    let winMove = this.gameBoard.getWinMove(this.computerSide);
-    if(winMove) {
+    const winMove = this.gameBoard.getWinMove(this.computerSide);
+    if (winMove) {
       return winMove;
     }
+
     let highScore = currState.moveList[0].score;
-    for(let i = 1; i < currState.moveList.length; i++){
-      if(currState.moveList[i].score > highScore) {
+    for (let i = 1; i < currState.moveList.length; i++) {
+      if (currState.moveList[i].score > highScore) {
         highScore = currState.moveList[i].score;
       }
     }
+
     let drawCount = Infinity;
-    let possibleMoves:number[][] = [];
-    for(let i = 0; i < currState.moveList.length; i++) {
-      if(currState.moveList[i].score == highScore) {
-        if(currState.moveList[i].drawCount < drawCount) {
+    const possibleMoves: number[][] = [];
+    for (let i = 0; i < currState.moveList.length; i++) {
+      if (currState.moveList[i].score == highScore) {
+        if (currState.moveList[i].drawCount < drawCount) {
           drawCount = currState.moveList[i].drawCount;
         }
       }
     }
 
-    for(let i = 0; i < currState.moveList.length; i++) {
-      if(currState.moveList[i].score == highScore) {
-        if(currState.moveList[i].drawCount == drawCount) {
+    for (let i = 0; i < currState.moveList.length; i++) {
+      if (currState.moveList[i].score == highScore) {
+        if (currState.moveList[i].drawCount == drawCount) {
           possibleMoves.push(currState.moveList[i].move);
         }
       }
     }
 
-    let pickrnd = Math.floor(Math.random() * possibleMoves.length);
+    const pickrnd = Math.floor(Math.random() * possibleMoves.length);
     return possibleMoves[pickrnd];
   }
 }

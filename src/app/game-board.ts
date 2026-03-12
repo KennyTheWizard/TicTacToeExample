@@ -3,7 +3,11 @@ import { GameResult } from './game-result';
 export class GameBoard {
     // gameboard is a 2 by two matrix with the top left square at 0,0 and bottom right at 2, 2
     // 1 = x, 0 = blank, -1 = o;
-    board:number[][];
+    board: number[][] = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+    ];
 
     resetBoard() {
         this.board = [
@@ -25,9 +29,9 @@ export class GameBoard {
     }
 
     getCloneBoard():number[][] {
-        let newBoard = [];
+        const newBoard: number[][] = [];
         for(let i = 0; i < this.board.length; i++) {
-            newBoard[i] = [];
+            newBoard[i] = [] as number[];
             for(let j = 0; j < this.board[i].length; j++) {
                 newBoard[i][j] = this.board[i][j].valueOf();
             }
@@ -47,7 +51,7 @@ export class GameBoard {
         return moves;
     }
 
-    getWinMove(currentSide:number):number[] {
+    getWinMove(currentSide: number): number[] | undefined {
 
         let rowSums:number[] = [0, 0, 0];
         let colSums:number[] = [0, 0, 0];
